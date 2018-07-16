@@ -1,9 +1,8 @@
 """
 FILTERED ELEMENT COLLECTOR
 """
-__author__ = 'Sol Amour - sol.amour@designtech.io'
+__author__ = 'Sol Amour - amoursol@gmail.com'
 __twitter__ = '@solamour'
-__copyright__ = 'designtech.io 2018'
 __version__ = '1.0.0'
 
 
