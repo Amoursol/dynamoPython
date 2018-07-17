@@ -19,12 +19,12 @@ from RevitServices.Transactions import TransactionManager # From RevitServices i
 # Here we give the Revit Document a nickname of 'doc' which allows us to simply call 'doc' later without having to type the long namespace name 
 doc = DocumentManager.Instance.CurrentDBDocument
 
-# Custom method to convert single items to a list to iterate over
+# Custom method to convert single items to a list to iterate over, also unwraps the items.
 def toList(x): # the name of the function
-	if not isinstance(x,(list,tuple)): return [x] # if the input element is a single thing, return it as a list. 
-	else : return x # if the input thing was a list all along, just return that
+	if isinstance(x,list): return UnwrapElement(x) # if the input element is a single thing, return it as a list. 
+	else : return [UnwrapElement(x)] # if the input thing was a list all along, just return that
 
 # The input ports
-element = toList(UnwrapElement(IN[0])) # Convert the input to a list (if necessary).
+element = toList(IN[0]) # Convert the input to a list (if necessary).
 
 OUT = element # simply output the new list for this example
