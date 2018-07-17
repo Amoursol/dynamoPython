@@ -1,5 +1,5 @@
 """
-LIST TRANSPOSE
+LIST TRANSPOSE (MAP)
 """
 __author__ = 'Sol Amour - amoursol@gmail.com'
 __twitter__ = '@solamour'
