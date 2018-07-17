@@ -1,5 +1,5 @@
 # Dynamo Python
-[dynamoPython](https://github.com/Amoursol/dynamoPython) is a web platform to share annotated Python example scripts in the context of Dynamo.
+[dynamoPython](https://github.com/Amoursol/dynamoPython) is a web platform to share ```Annotated Python Example Scripts``` in the context of Dynamo.
 
 ## HOW TO USE:
 All Code can be copy and pasted into Python modules inside of [Dynamo](http://dynamobim.org/). 
@@ -7,7 +7,7 @@ All Code can be copy and pasted into Python modules inside of [Dynamo](http://dy
 All python scripts should work with appropriate information passed into the input ports. 
 
 ## CONTRIBUTION:
-All scripts should be heavily **Annotated** as the itention of this resource is to educate.
+All scripts should be heavily **Annotated** as the intention of this resource is to educate.
 
 If you wish to contribute, please follow the syntax below:
 
