@@ -2,9 +2,13 @@
 [dynamoPython](https://github.com/Amoursol/dynamoPython) is a web platform to share annotated Python example scripts in the context of Dynamo.
 
 ## HOW TO USE:
-All Code can be copy and pasted into Python modules inside of [Dynamo](http://dynamobim.org/). All python scripts should work with appropriate information passed into the input ports. 
+All Code can be copy and pasted into Python modules inside of [Dynamo](http://dynamobim.org/). 
+
+All python scripts should work with appropriate information passed into the input ports. 
 
 ## CONTRIBUTION:
+All scripts should be heavily **Annotated** as the itention of this resource is to educate.
+
 If you wish to contribute, please follow the syntax below:
 
 ```
@@ -19,7 +23,5 @@ Script Notes/Information
 
 Script Body
 ```
-All scripts should be heavily **Annotated** as the itention of this resource is to educate.
-
 ## NOTES
 Dynamo Python was started by: [Sol Amour](https://github.com/Amoursol/dynamoPython)
