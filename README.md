@@ -19,6 +19,7 @@ Script Notes/Information
 
 Script Body
 ```
+All scripts should be heavily **Annotated** as the itention of this resource is to educate.
 
 ## NOTES
 Dynamo Python was started by: [Sol Amour](https://github.com/Amoursol/dynamoPython)
