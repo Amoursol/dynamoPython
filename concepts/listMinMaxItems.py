@@ -17,12 +17,17 @@ iterable = An iterable element (Such as a list, tuple, dictionary)
 
 
 dataSingle = [ 1, 2, 3, 4, 5 ] # A data list of numbers
-dataDouble = [["A", 11], ["B", 7], ["C", 9]] # A data list of lists (Paired alphabetic and numeric characters)
+dataDouble = [["A", 11], ["B", 7], ["C", 9]] # A data list of lists (Paired alphabetic 
+# and numeric characters)
 
 minimumItem = min(dataSingle) # Will return the first pairing of '[ "A", 0 ]'
 maximumItem = max(dataSingle) # Will return the last pairing of '[ "C", 2 ]'
 
-minimumItemKey = min(dataDouble, key = lambda d : d[1] ) # Will return the middle pairing of '["B", 7]' as we use an anonymous function (Lambda) as our key that simple states we're parsing the 'minimum item' based off Index 1 (Our numbers)
-maximumItemKey = max(dataDouble, key = lambda d : d[1] ) # Will return the first pairing of '["A", 11]' as we use an anonymous function (Lambda) as our key that simple states we're parsing the 'maximum item' based off Index 1 (Our numbers)
+minimumItemKey = min(dataDouble, key = lambda d : d[1] ) # Will return the middle pairing of 
+# '["B", 7]' as we use an anonymous function (Lambda) as our key that simple states we're parsing 
+# the 'minimum item' based off Index 1 (Our numbers)
+maximumItemKey = max(dataDouble, key = lambda d : d[1] ) # Will return the first pairing of 
+# '["A", 11]' as we use an anonymous function (Lambda) as our key that simple states we're parsing 
+# the 'maximum item' based off Index 1 (Our numbers)
 
 OUT = minimumItem,maximumItem,minimumItemKey,maximumItemKey
