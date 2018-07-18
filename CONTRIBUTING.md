@@ -1,6 +1,11 @@
 ## CONTRIBUTION:
 All scripts should be heavily **Annotated** as the intention of this resource is to educate.
 
+All code lines to be limited to a maximum of 79 characters as per the [PEP 8 Style Guide](https://www.python.org/dev/peps/pep-0008/?#maximum-line-length)
+
+For flowing long blocks of text with fewer structural restrictions (docstrings or comments), the line length should be limited to 72 characters.
+
+### Syntax:
 If you wish to contribute, please follow the syntax below:
 
 ```
