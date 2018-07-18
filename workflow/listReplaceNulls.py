@@ -15,7 +15,6 @@ for item in data: # A 'For' loop that we run over the entire list (data) of inpu
 	if item is not None: # A conditional check that says: "If an item in the list called 'data' 'is not None' (That is - is valid) - simply add it to our output list"
 		results.append(item) # If the conditional check is sucessful, then append that element to our container list called 'results'
 	else: # If the item IS a null (None), then do the following
-		results.append(replacementItem = 'I\'m not a None' # A replacement item (Note: The backslash is an 'Escape Character' that allows us to use an apostrophe inside of a string)
-) # If the conditional check fails, then append our replacement element to our container list called 'results' in the place of the None at the same index
+		results.append(replacementItem) # If the conditional check fails, then append our replacement element to our container list called 'results' in the place of the None at the same index
 		
 OUT = results
