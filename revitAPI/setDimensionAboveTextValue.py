@@ -68,5 +68,5 @@ TransactionManager.Instance.TransactionTaskDone() # After we have our script bod
 # executing, we want to close our Transaction. So we once again use the wrapper to close the 
 # Transaction using the 'TransactionTaskDone()' method
 
-# The output port, showcasing the Revit Documents Saved Name
+# The output port, showcasing the dimension elements
 OUT = results
