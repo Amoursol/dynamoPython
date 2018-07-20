@@ -13,7 +13,8 @@ __version__ = '1.0.0'
 # All parameters can be either integers or doubles
 # All parameters can be positive or negative
 # range( amount ) is the same as range( 0, amount )
-# To achieve the same output as '0..10' in DesignScript, you must use 'range( 10 + 1 )' as the Stop value is not included in the range function
+# To achieve the same output as '0..10' in DesignScript, you must use 
+# 'range( 10 + 1 )' as the Stop value is not included in the range function
 
 # The input ports
 step = IN[0] # A number such as 20 (int) or 20.5 (float) demarcating the step
