@@ -26,10 +26,10 @@ def floatRange( start, end, step ):
 
 # The input ports
 start = IN[0] # A number such as 0 (int)
-end = IN[1] # A number such as 10 (int)
+stop = IN[1] # A number such as 10 (int)
 
 # A divisor calculation that changes our ints to floats
-step = ( 1.0 / end )
+step = ( 1.0 / stop )
 
 # The output port - In this case a list comprehension
-OUT = [ value for value in floatRange( start, end + 1, step ) ]
+OUT = [ value for value in floatRange( start, stop + 1, step ) ]
