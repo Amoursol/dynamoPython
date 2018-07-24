@@ -1,5 +1,5 @@
 '''
-FILTERED ELEMENT COLLECTOR - INSTANCE_LENGTH_PARAM ELEMENTS ONLY
+FILTERED ELEMENT COLLECTOR - CURVE_ELEM_LENGTH
 '''
 __author__ = 'Adam Bear - adam@ukbear.com'
 __twitter__ = '@adambear82'
