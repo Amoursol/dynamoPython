@@ -10,4 +10,4 @@ All python scripts should work with appropriate information passed into the inpu
 If you wish to contribute to the repository, then please have a read of the [CONTRIBUTING](https://github.com/Amoursol/dynamoPython/blob/master/CONTRIBUTING.md) file and adhere to the standards within.
 
 ## NOTES
-Dynamo Python was started by: [Sol Amour](https://github.com/Amoursol/dynamoPython)
+Dynamo Python was started by: [Sol Amour](https://github.com/Amoursol/dynamoPython) and is for the community to contribute to.
