@@ -58,7 +58,7 @@ except :
 		counterPlusOne = 0
 
 # an output that changes from 0 to 9999.... is not very useful
-# specify and end value that after which the value should return to zero
+# specify an end value that after which the value should return to zero
 end = 10
 # use the modulus operator '%' to find the remainder of the division
 index = counterPlusOne % end
