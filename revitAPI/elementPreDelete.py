@@ -2,7 +2,7 @@
 ELEMENT PRE-DELETE
 """
 __author__ = 'Oliver Green - oliveredwardgreen@gmail.com'
-__twitter__ = 'Oliver_E_Green'
+__twitter__ = '@Oliver_E_Green'
 __version__ = '1.0'
 
 """This script prompts the user to select an element in Revit.
