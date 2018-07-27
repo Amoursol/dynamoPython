@@ -91,7 +91,7 @@ def ListChopEvenly(l, n):
 	# https://stackoverflow.com/questions/312443/how-do-you-split-a-list-into-evenly-sized-chunks
 	return [l[i:i + n] for i in xrange(0, len(l), n)]
 # clockworks chop definition is used to chop the geometry
-choppedGroups = ListChopEvenly(colorByGroup, len(geom))
+choppedGroups = ListChopEvenly(colorByGroup, len(geometry))
 
 # the choppedGroups are sent to the OUT port
 OUT = choppedGroups
