@@ -19,8 +19,7 @@ import Autodesk # Here we import the Autodesk namespace
 # From the Autodesk namespace - derived down to the Revit Database, we imoprt 
 # only the Filtered Element Collector, Wall, ElementId and ElementLevelFilter 
 # classes
-from Autodesk.Revit.DB import FilteredElementCollector, Wall, ElementId, 
-ElementLevelFilter 
+from Autodesk.Revit.DB import FilteredElementCollector, Wall, ElementId, ElementLevelFilter
 
 
 # Here we give the Revit Document a nickname of 'doc' which allows us to simply 
@@ -34,8 +33,7 @@ filter = ElementLevelFilter( Autodesk.Revit.DB.ElementId( IN[0].Id ) )
 # We then run a 'Filtered Element Collector' with our created 'filter' (Chosen 
 # Level), and discount any element that is an 'Element Type' before using the 
 # 'ToElements' call to return real elements.
-elementAtLevelCollector = FilteredElementCollector( doc ).WherePasses( filter )
-.WhereElementIsNotElementType().ToElements()
+elementAtLevelCollector = FilteredElementCollector( doc ).WherePasses( filter ).WhereElementIsNotElementType().ToElements()
 
 # To get our results back inside of Dynamo, we need to append a list to the OUT 
 # port
