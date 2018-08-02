@@ -19,7 +19,7 @@ clr.AddReference("RevitAPI")
 clr.AddReference("RevitServices")
 
 # import filtered element collector and revit link instance classes
-from Autodesk.Revit.DB import FilteredElementCollector, RevitLinkInstance
+from Autodesk.Revit.DB import FilteredElementCollector, BuiltInCategory, ElementCategoryFilter
 
 # import document manager
 from RevitServices.Persistence import DocumentManager
@@ -31,7 +31,7 @@ doc = DocumentManager.Instance.CurrentDBDocument
 category = IN[0]
 
 # convert category to BuiltInCategory
-obj = System.Enum.ToObject(BuiltInCategory, cat.Id)
+obj = System.Enum.ToObject(BuiltInCategory, category.Id)
 
 # constructs a new instance of a filter to match elements by category
 filter = ElementCategoryFilter(obj)
