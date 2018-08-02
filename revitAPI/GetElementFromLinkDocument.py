@@ -1,5 +1,5 @@
 '''
-FILTERED ELEMENT COLLECTOR - GET LINK DOCUMENTS
+FILTERED ELEMENT COLLECTOR - GET ELEMENTS FROM LINK DOCUMENTS
 '''
 
 __author__ = 'min.naung/mgjean @https://twentytwo.space/contact'
