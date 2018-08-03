@@ -25,15 +25,15 @@ from RevitServices.Persistence import DocumentManager
 doc = DocumentManager.Instance.CurrentDBDocument
 
 # collect link documents
-linkInstances = FilteredElementCollector(doc).OfClass(RevitLinkInstance).ToElements()
+links = FilteredElementCollector(doc).OfClass(RevitLinkInstance).ToElements()
 
 # create empty list for OUT(retrun)
 load = []
 
 # input is true
 if IN[0]:
-	# loop linkInstances list
-	for link in linkInstances:
+	# loop links list
+	for link in links:
 		#get link type document
 		linkType  = doc.GetElement(link.GetTypeId())
 		#get link document saved filepath
