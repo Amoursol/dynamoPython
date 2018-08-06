@@ -27,19 +27,19 @@ from RevitServices.Transactions import TransactionManager
 doc = DocumentManager.Instance.CurrentDBDocument
 
 # input model curves
-lines = IN[0];
+lines = IN[0]
 # empty list for return output
-beams = [];
+beams = []
 
 # if input is a list 
 if isinstance(lines, list):
-	lines = UnwrapElement(lines);
+	lines = UnwrapElement(lines)
 # if not a list
 else:
-	lines = UnwrapElement([lines]);
+	lines = UnwrapElement([lines])
 
 #current view level
-level = doc.ActiveView.GenLevel;
+level = doc.ActiveView.GenLevel
 
 #collect family symbol
 fsymbol = FilteredElementCollector(doc).OfClass(FamilySymbol)
@@ -48,18 +48,18 @@ fsymbol = FilteredElementCollector(doc).OfClass(FamilySymbol)
 sym=fsymbol.OfCategory(BuiltInCategory.OST_StructuralFraming).ToElements()[0]
 
 #transaction start
-TransactionManager.Instance.EnsureInTransaction(doc);
+TransactionManager.Instance.EnsureInTransaction(doc)
 
 for line in lines:
 	
 	#create beam
 	beam = doc.Create.NewFamilyInstance(line.GeometryCurve, sym, 
-		level, Structure.StructuralType.Beam);
+		level, Structure.StructuralType.Beam)
 	#append to output
-	beams.append(beam);
+	beams.append(beam)
 
 #transaction end
-TransactionManager.Instance.TransactionTaskDone();
+TransactionManager.Instance.TransactionTaskDone()
 
 #output
-OUT = beams;
+OUT = beams
