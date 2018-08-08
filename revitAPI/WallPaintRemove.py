@@ -30,9 +30,9 @@ walls = IN[0];
 
 # check input is list or not
 if not isinstance(walls, list):
-	walls = UnwrapElement([walls]);
+	walls = UnwrapElement([walls])
 else:	
-	walls = UnwrapElement(walls);
+	walls = UnwrapElement(walls)
 
 # start transaction
 TransactionManager.Instance.EnsureInTransaction(doc)
@@ -56,7 +56,7 @@ for i in walls:
 			doc.RemovePaint(i.Id,f)
 			
 #end of transaction		
-TransactionManager.Instance.TransactionTaskDone();
+TransactionManager.Instance.TransactionTaskDone()
 			
 # output result
-OUT = walls;
+OUT = walls
