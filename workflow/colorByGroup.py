@@ -3,7 +3,7 @@ COLOR BY GROUP - VISUALISE GROUPS AS IN GROUP BY KEY
 '''
 __author__ = 'Adam Bear - adam@ukbear.com'
 __twitter__ = '@adambear82'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 # IMPORTS / REFERENCES:
 import clr
