@@ -14,8 +14,25 @@ from Autodesk.DesignScript.Geometry import *
 clr.AddReference('Display')
 from Display import *
 
+# function to find the depth of a list, refer to stack overflow
+# https://stackoverflow.com/questions/6039103/counting-depth-or-the-deepest-level-a-nested-list-goes-to
+def depth(l) :
+	# check if instance of l is a list
+	if isinstance(l, list) :
+		# find the maximum depth of all items in nested sub lists
+		maxDepth = max(depth(i) for i in l)
+		# include the list that sub lists are counted from
+		plusOne = 1 + maxDepth
+		# return the value
+		return plusOne
+	# if l is not a list, eg a single item
+	else:
+		# a single item has 0 list levels
+		return 0
+
 # IN PORTS:
 geometry = IN[0]
+depthGeometry = depth(geometry)
 
 # define all the colors of the rainbow in a spectrum list
 c00 = red = DSCore.Color.ByARGB(255, 255, 000, 000)
@@ -77,11 +94,57 @@ for i in gUV :
 
 # create an empty list colorByGroup to hold geometry displayed in color
 colorByGroup = []
-# for each item 'geom' in the geometry
-for geom, c in zip(geometry, colors) :
-	for g in geom :
-		colorByGroup.append(Display.ByGeometryColor(g, c))
 
+# zip allows multiple items to be refered to in a loop
+# refer to geometry and colors as g1 and c
+for g1, c in zip(geometry, colors) :
+
+	# check how many levels the list has, eg 1D list
+	if depthGeometry == 1 :
+		# append Display of g1 geometry using c colors to colorByGroup
+		colorByGroup.append(Display.ByGeometryColor(g1, c))
+
+	# if not a 1D list, possibly 2D or 3D
+	else:
+		# loop for another level (g2)
+		for g2 in g1 :
+
+			# check how many levels the list has, eg 2D list
+			if depthGeometry == 2 :
+				# append Display of g2 geometry using c colors to colorByGroup
+				colorByGroup.append(Display.ByGeometryColor(g2, c))
+
+			# if not a 2D list, possibly 3D
+			else :
+				# loop for another level (g3)
+				for g3 in g2 :
+
+					# check how many levels the list has, eg 3D list
+					if depthGeometry == 3 :
+						# append Display of g3 geometry using c colors to colorByGroup
+						colorByGroup.append(Display.ByGeometryColor(g3, c))
+
+'''
+# alternative approach where each condition is considered seperately
+# perhaps not as efficient but easier to read and understand
+
+for g1, c in zip(geometry, colors) :
+
+	# check how many levels the list has, eg 1D list
+	elif depthGeometry == 1 :
+		colorByGroup.append(Display.ByGeometryColor(g1, c))
+
+	# check how many levels the list has, eg 2D list
+	elif depthGeometry == 2 :
+		for g2 in g1 :
+			colorByGroup.append(Display.ByGeometryColor(g2, c))
+
+	# check how many levels the list has, eg 3D list
+	elif depthGeometry == 2 :
+		for g2 in g1 :
+			for g3 in g2 :
+				colorByGroup.append(Display.ByGeometryColor(g3, c))
+'''
 
 # to output the displayed geometry in the same groups as it is inputed
 # clockwork provides a good example of how to chop lists evenly
