@@ -3,7 +3,7 @@ COLOR BY GROUP - VISUALISE GROUPS AS IN GROUP BY KEY
 '''
 __author__ = 'Adam Bear - adam@ukbear.com'
 __twitter__ = '@adambear82'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 # IMPORTS / REFERENCES:
 import clr
@@ -140,7 +140,7 @@ for g1, c in zip(geometry, colors) :
 			colorByGroup.append(Display.ByGeometryColor(g2, c))
 
 	# check how many levels the list has, eg 3D list
-	elif depthGeometry == 2 :
+	elif depthGeometry == 3 :
 		for g2 in g1 :
 			for g3 in g2 :
 				colorByGroup.append(Display.ByGeometryColor(g3, c))
