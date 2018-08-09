@@ -24,7 +24,7 @@ time_info = strftime("%d %b %Y at %H:%M", gmtime())
 
 # See https://docs.python.org/2/library/datetime.html
 from System import DateTime
-time_info  =DateTime.Now
+time_info = DateTime.Now
 
 
 # Imports operating system interfaces
@@ -79,7 +79,10 @@ def convertSize(size):
        
 # To run it and include bytes value in brackets
 File_Size_input = 59158528
-File_Size_Output = convertSize(File_Size_input).ToString() + " (" + format(File_Size_input,',d') + " bytes)"
+File_Size_Output = convertSize(File_Size_input).ToString() + 
+                  " (" + 
+                  format(File_Size_input,',d') +
+                  " bytes)"
 
 
 # Import Iteration tools
@@ -87,7 +90,7 @@ File_Size_Output = convertSize(File_Size_input).ToString() + " (" + format(File_
 import itertools
 
 # Application 
-All_Warning_Names_Unique=[(g[0].ToString(), len(list(g[1])).ToString()) for g in itertools.groupby(All_Warning_Names)]
+UniqueOutput=[(g[0].ToString(), len(list(g[1])).ToString()) for g in itertools.groupby(input)]
 
 
 # Imports Webbrowser Module
