@@ -1,5 +1,6 @@
 '''
-Set Parameter that contain elements(eg arrowheads) to null(Single parameter for all element input)
+Set Parameter that contain elements(eg arrowheads) to null
+(Single parameter for all element input)
 '''
 __author__ = 'Brendan cassidy'
 __twitter__ = '@brencass86'
@@ -26,30 +27,30 @@ clr.AddReference("RevitAPI")
 import Autodesk
 from Autodesk.Revit.DB import *
 
-#revit document
+# revit document
 doc = DocumentManager.Instance.CurrentDBDocument
 
-#Existing Element Input
+# Existing Element Input
 elements = UnwrapElement(IN[0])
 
-#Built in parameters
-#MUST not be a list
-#Reference to be made to built in parameters http://www.revitapidocs.com/2015/fb011c91-be7e-f737-28c7-3f1e1917a0e0.htm
-paras=BuiltInParameter.LEADER_ARROWHEAD
+# Built in parameters
+# MUST not be a list
+# Reference to be made to built in parameters http://www.revitapidocs.com/2015/fb011c91-be7e-f737-28c7-3f1e1917a0e0.htm
+paras = BuiltInParameter.LEADER_ARROWHEAD
 
-#Revit transation to delete and duplicate elements
+# Revit transation to delete and duplicate elements
 TransactionManager.Instance.EnsureInTransaction(doc)
 
-#Set Parameter to Invalid Element ID to make it become null
-output=[]
+# Set Parameter to Invalid Element ID to make it become null
+output = []
 for e in elements:
 	#eliminates null element inputs if any
-  if e:
+	if e:
 		e.get_Parameter(paras).Set(ElementId.InvalidElementId)
-	  output.append(e)
+		output.append(e)
 
-#End Revit Trasaction
+# End Revit Trasaction
 TransactionManager.Instance.TransactionTaskDone()
 
-#Output new elements
-OUT=output
+# Output new elements
+OUT = output
