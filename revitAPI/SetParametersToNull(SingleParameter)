@@ -1,0 +1,55 @@
+'''
+Set Parameter that contain elements(eg arrowheads) to null(Single parameter for all element input)
+'''
+__author__ = 'Brendan cassidy'
+__twitter__ = '@brencass86'
+__version__ = '1.0.0'
+
+import clr
+# Import ToDSType(bool) extension method
+clr.AddReference("RevitNodes")
+import Revit
+clr.ImportExtensions(Revit.Elements)
+
+# Import geometry conversion extension methods
+clr.ImportExtensions(Revit.GeometryConversion)
+
+# Import DocumentManager and TransactionManager
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+from System.Collections.Generic import *
+
+# Import RevitAPI
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+
+#revit document
+doc = DocumentManager.Instance.CurrentDBDocument
+
+#Existing Element Input
+elements = UnwrapElement(IN[0])
+
+#Built in parameters
+#MUST not be a list
+#Reference to be made to built in parameters http://www.revitapidocs.com/2015/fb011c91-be7e-f737-28c7-3f1e1917a0e0.htm
+paras=BuiltInParameter.LEADER_ARROWHEAD
+
+#Revit transation to delete and duplicate elements
+TransactionManager.Instance.EnsureInTransaction(doc)
+
+#Set Parameter to Invalid Element ID to make it become null
+output=[]
+for e in elements:
+	#eliminates null element inputs if any
+  if e:
+		e.get_Parameter(paras).Set(ElementId.InvalidElementId)
+	  output.append(e)
+
+#End Revit Trasaction
+TransactionManager.Instance.TransactionTaskDone()
+
+#Output new elements
+OUT=output
