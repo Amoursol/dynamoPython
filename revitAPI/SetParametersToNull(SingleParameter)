@@ -35,7 +35,8 @@ elements = UnwrapElement(IN[0])
 
 # Built in parameters
 # MUST not be a list
-# Reference to be made to built in parameters http://www.revitapidocs.com/2015/fb011c91-be7e-f737-28c7-3f1e1917a0e0.htm
+# Reference to be made to built in parameters
+# http://www.revitapidocs.com/2015/fb011c91-be7e-f737-28c7-3f1e1917a0e0.htm
 paras = BuiltInParameter.LEADER_ARROWHEAD
 
 # Revit transation to delete and duplicate elements
