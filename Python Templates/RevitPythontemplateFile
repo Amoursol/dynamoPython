@@ -31,16 +31,16 @@ clr.AddReference("System")
 from System.Collections.Generic import List as cList
 
 # Ilist Application
-New_List=cList[ElementId]("elements")
+New_List = cList[ElementId]("elements")
 
 # Standard areas for Current Document, Active UI and application
 doc = DocumentManager.Instance.CurrentDBDocument
 uiapp = DocumentManager.Instance.CurrentUIApplication
 app = uiapp.Application
-uidoc=DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument
+uidoc = DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument
 
 # Input and unwrapping 
-input=UnwrapElement(IN[0])
+input = UnwrapElement(IN[0])
 
 # Start Transaction
 TransactionManager.Instance.EnsureInTransaction(doc)
