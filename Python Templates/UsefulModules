@@ -78,7 +78,7 @@ def convertSize(size):
        return '0B'
        
 # To run it and include bytes value in brackets
-File_Size_input  =59158528
+File_Size_input = 59158528
 File_Size_Output = convertSize(File_Size_input).ToString() + " (" + format(File_Size_input,',d') + " bytes)"
 
 
