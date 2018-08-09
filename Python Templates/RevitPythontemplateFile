@@ -1,6 +1,9 @@
-#Python Template For Dynamo
-#Revit Based Python Imports
-#Created By Brendan Cassidy
+'''
+Python Templates - Revit Based Python Imports
+'''
+__author__ = 'Brendan cassidy'
+__twitter__ = '@brencass86'
+__version__ = '1.0.0'
 
 import clr
 
