@@ -11,10 +11,13 @@ list_Of_List_Regular = [[1,2,3],[4,5,6],[7,8,9]]
 
 list_Of_List_Irregular = [[1,2,[1,2,3]],[4,5,6],[7,8,9]]
 
-#flatten a list with list comprehension, elegant but this works only for 1 leve List of Lists https://coderwall.com/p/rcmaea/flatten-a-list-of-lists-in-one-line-in-python
+#flatten a list with list comprehension, elegant but this works 
+#only for 1 leve List of Lists 
+#https://coderwall.com/p/rcmaea/flatten-a-list-of-lists-in-one-line-in-python
 flat_List1 = [item for sublist in list_Of_List_Regular for item in sublist]
 
-#Flatten an irregular list of list with a function https://stackoverflow.com/questions/2158395/flatten-an-irregular-list-of-lists
+#Flatten an irregular list of list with a function 
+#stackoverflow.com https://bit.ly/2MxA2Ro
 
 def flatten(L):
     for item in L:
