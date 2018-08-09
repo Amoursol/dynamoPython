@@ -25,8 +25,8 @@ from RevitServices.Transactions import TransactionManager
 # instantiate current document
 doc = DocumentManager.Instance.CurrentDBDocument
 
-
-walls = IN[0];
+# input wall elements
+walls = IN[0]
 
 # check input is list or not
 if not isinstance(walls, list):
