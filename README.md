@@ -23,3 +23,4 @@ Many thanks to all contributors of this community focused resource:
 * [Pablo Derendinger](https://github.com/pabloderen)
 * [John Pierson](https://github.com/sixtysecondrevit)
 * [Racel Williams](https://github.com/Racel)
+* [Radu Gidei](https://github.com/radumg)
