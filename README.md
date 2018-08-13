@@ -22,4 +22,4 @@ Many thanks to all contributors of this community focused resource:
 * [Oliver Green](https://github.com/OliverEGreen)
 * [Pablo Derendinger](https://github.com/pabloderen)
 * [John Pierson](https://github.com/sixtysecondrevit)
-* [Racel Williamns](https://github.com/Racel)
+* [Racel Williams](https://github.com/Racel)
