@@ -73,17 +73,16 @@ for n0 in numbers :
 # chop list
 # ------------------------
 
-
 def ListChopUnevenly(chopList, chopLengths) :
-    # to output the numbers in the same sub list nesting as inputed
-    # clockwork provides a good example of how to chop lists unevenly
-    # annotated with kudos from
-    # https://github.com/andydandy74/ClockworkForDynamo/blob/master/nodes/1.x/List.Chop%2B.dyf
-    # define the function with variables
+# to output the numbers in the same sub list nesting as it was inputed
+# clockwork provides a good example of how to chop lists unevenly
+# annotated with kudos from
+# https://github.com/andydandy74/ClockworkForDynamo/blob/master/nodes/1.x/List.Chop%2B.dyf
+# define the function with variables
 
-    # create an empty list to return values from
-    chopped = []
-    # set an initail value for a counter
+	# create an empty list to return values from
+	chopped = []
+	# set an initail value for a counter
 	count = 0
 	# find the length of the list to be chopped
 	max = len(chopList)

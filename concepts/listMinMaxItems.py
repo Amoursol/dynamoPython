@@ -20,8 +20,8 @@ dataSingle = [ 1, 2, 3, 4, 5 ] # A data list of numbers
 dataDouble = [["A", 11], ["B", 7], ["C", 9]] # A data list of lists (Paired alphabetic 
 # and numeric characters)
 
-minimumItem = min(dataSingle) # Will return the first pairing of '[ "A", 0 ]'
-maximumItem = max(dataSingle) # Will return the last pairing of '[ "C", 2 ]'
+minimumItem = min(dataSingle) # Will return the lowest natural sort item of '1'
+maximumItem = max(dataSingle) # Will return the highest natural sort item of '5'
 
 minimumItemKey = min(dataDouble, key = lambda d : d[1] ) # Will return the middle pairing of 
 # '["B", 7]' as we use an anonymous function (Lambda) as our key that simple states we're parsing 
