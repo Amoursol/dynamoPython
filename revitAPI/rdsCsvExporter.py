@@ -115,6 +115,9 @@ for r in allRooms :
 		elif strStorageType == 'Double' :
 			# cast value as double
 			doubleValue = value.AsDouble()
+			# convert square feet to square meters for area
+			if p == "Area" :
+				doubleValue = doubleValue * 0.092903 
 			# round the double value
 			doubleRound = round(doubleValue, 3)
 			# append values
@@ -122,6 +125,7 @@ for r in allRooms :
 
 # a flat list values needs to be chopped into groups by list length
 choppedValues = ListChopEvenly(values, paramsLen)
+choppedValues.sort()
 
 # -----------------------
 # write csv file of room parameters
