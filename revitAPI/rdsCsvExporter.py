@@ -82,11 +82,6 @@ replaceParams = inputParams.replace(' ', '')
 params = replaceParams.split(',')
 # so we can chop a flat list into groups we need to know its lengths
 paramsLen = len(params)
-# we will need somehere to store values for csv
-values = []
-# the csv will need to have as headers for each parameter
-for p in params :
-	values.append(p)
 
 # -----------------------
 # inputs
@@ -94,7 +89,8 @@ for p in params :
 
 # collect all rooms as elements
 allRooms = fec(doc).OfCategory(BuiltInCategory.OST_Rooms).ToElements()
-
+# we will need somehere to store values for csv
+values = []
 # to lookup the parameter value, for each parameter, for each room
 for r in allRooms :
 	for p in params :
@@ -126,6 +122,12 @@ for r in allRooms :
 # a flat list values needs to be chopped into groups by list length
 choppedValues = ListChopEvenly(values, paramsLen)
 choppedValues.sort()
+
+# the csv will need to have as headers for each parameter
+headers = []
+for p in params :
+	headers.append(p)
+choppedValues.insert(0, headers)
 
 # -----------------------
 # write csv file of room parameters
