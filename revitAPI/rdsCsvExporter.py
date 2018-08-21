@@ -64,7 +64,7 @@ def ListChopEvenly(l, n):
 	return [l[i:i + n] for i in xrange(0, len(l), n)]
 
 # -----------------------
-# input paramters
+# input parameters
 # -----------------------
 
 # in the dynamo environment wire a string node to the input
@@ -84,7 +84,7 @@ params = replaceParams.split(',')
 paramsLen = len(params)
 
 # -----------------------
-# inputs
+# parameter values
 # -----------------------
 
 # collect all rooms as elements
