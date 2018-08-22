@@ -20,21 +20,36 @@ there are a lot of categories to include
 # import modules
 # ------------------------
 
-# in oder to use the clipboard we need to import this
+# refer to the clipboard
 import clr
 clr.AddReference('System.Windows.Forms')
 from System.Windows.Forms import Clipboard
+
+# refer to the document manager
+clr.AddReference('RevitServices')
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+doc = DocumentManager.Instance.CurrentDBDocument
+
+# refer to the revit API
+clr.AddReference('RevitAPI')
+import Autodesk
+from Autodesk.Revit.DB import *
 
 # ------------------------
 # inputs & variables
 # ------------------------
 
+# some categoreies exported from navisworks are not included as
+# categories in visibility graphics, for examplevv
+# Handrails, Landings, Pads, Runs, Slab Edges, Top Rails, Wall Sweeps
+
 # remove single and double spaces after commas and split into list
 catsInput = IN[0]
 catsReplace1 = catsInput.replace(', ', ',')
 catsReplace2 = catsReplace1.replace(',  ', ',')
-cats = catsReplace2.split(',')
-cats.sort()
+catsManual = catsReplace2.split(',')
+catsManual.sort()
 
 # provide reference strings
 hashtag = 'Renamed Columns1'
@@ -43,12 +58,34 @@ filterIn = 'filter_in'
 filterOut = 'filter_out'
 
 # ------------------------
+# get categories
+# ------------------------
+
+# get categories that can add sub categories
+# ie the categories which appear in vis graphics
+# annotated from forum post with kudos to René Picazo
+# https://forum.dynamobim.com/t/get-all-elements-in-model-categories/9447/7
+modelCats = []
+for cat in doc.Settings.Categories :
+     if cat.CategoryType == CategoryType.Model and cat.CanAddSubcategory:
+         modelCats.append(cat.Name)
+
+# only append extra categories if they have been defined in input
+if catsInput :
+	for cat in catsManual :
+		modelCats.append(cat)
+
+# sort alphabetically so its easier to read
+cats = sorted(modelCats)
+
+# ------------------------
 # strings
 # ------------------------
 
 # the 1st line adds a column to the table based on a filter on the hash
 table = ''.join(('= Table.AddColumn(#"', hashtag, '", "filter",'))
 
+# define strings to be used in M code
 each = 'each if ['
 elif0 = 'else if ['
 elif1 = '] = "'
