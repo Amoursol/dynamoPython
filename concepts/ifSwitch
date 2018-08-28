@@ -1,0 +1,38 @@
+'''
+IF SWITCH - USE A DICTIONARY FOR IF INSTEAD OF ELIF
+-
+a dynamoPython script, visit the website for more details
+https://github.com/Amoursol/dynamoPython
+'''
+__author__ = 'Adam Bear - adam@ukbear.com'
+__twitter__ = '@adambear82'
+__github__ = '@adambear82'
+__version__ = '1.0.0'
+
+'''
+rather than using if, elif and else a dictionary of values
+may be a simplier approach in some cases
+'''
+
+inputSwitch = IN[0]
+inputOne = IN[1]
+inputTwo = IN[2]
+inputThree = IN[3]
+inputFour = IN[4]
+
+# create a dictionary to map keys to IN[] values
+switcher = {
+	1 : inputOne,
+	2 : inputTwo,
+	3 : inputThree,
+	4 : inputFour
+}
+
+# get the dictionary value that corresponds to the key
+# if a corresponding value can not be found specify error message
+# include a string of the inputSwitch in the error message
+output = switcher.get(
+	inputSwitch,
+	str('no value for key ' + str(inputSwitch))
+)
+OUT = output
