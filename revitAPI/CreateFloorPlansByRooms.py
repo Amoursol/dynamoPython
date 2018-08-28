@@ -1,5 +1,5 @@
 '''
-CREATE FLOOR PLAN VIEW BY ROOMS, LEVELS
+CREATE FLOOR PLAN VIEW BY ROOMS, LEVEL
 '''
 __author__ = 'min.naung/mgjean @https://twentytwo.space/contact'
 __twitter__ = '@_mgjean'
@@ -37,22 +37,22 @@ else:
 
 # level input
 level = UnwrapElement(IN[2])
-# offset from room bbox
+# offset from room bbox (mm to ft)
 offset = IN[3]/304.8
 
 def crop_box(bbox, offset):
-	# modify x,y,z by offset
-	minX = bbox.Min.X - offset;
-	minY = bbox.Min.Y - offset;
-	minZ = bbox.Min.Z - offset;
-	maxX = bbox.Max.X + offset;
-	maxY = bbox.Max.Y + offset;
-	maxZ = bbox.Max.Z + offset;
+	# modify x,y,z point of bbox
+	minX = bbox.Min.X - offset
+	minY = bbox.Min.Y - offset
+	minZ = bbox.Min.Z - offset
+	maxX = bbox.Max.X + offset
+	maxY = bbox.Max.Y + offset
+	maxZ = bbox.Max.Z + offset
 	# create new bbox
-	newbox = BoundingBoxXYZ();
-	newbox.Min = XYZ(minX,minY, minZ);
-	newbox.Max = XYZ(maxX, maxY, maxZ);
-	return newbox;
+	newbox = BoundingBoxXYZ()
+	newbox.Min = XYZ(minX,minY, minZ)
+	newbox.Max = XYZ(maxX, maxY, maxZ)
+	return newbox
 
 # collect view type in document
 viewTypes = FilteredElementCollector(doc).OfClass(ViewFamilyType)
@@ -64,10 +64,11 @@ for i in viewTypes:
 		viewTypeId = i.Id
 		# break the loop
 		break
-# Start Transaction
+# start transaction
 TransactionManager.Instance.EnsureInTransaction(doc)
 # output list		
 floorPlans = []
+# loop rooms and names together
 for i,name in zip(rooms,names):
 	# level id
 	levelId = level.Id
@@ -92,4 +93,5 @@ for i,name in zip(rooms,names):
 	
 # End Transaction
 TransactionManager.Instance.TransactionTaskDone()
+# output 
 OUT = floorPlans
