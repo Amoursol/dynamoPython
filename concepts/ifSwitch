@@ -33,6 +33,6 @@ switcher = {
 # include a string of the inputSwitch in the error message
 output = switcher.get(
 	inputSwitch,
-	str('no value for key ' + str(inputSwitch))
+	'no value for key ' + str(inputSwitch)
 )
 OUT = output
