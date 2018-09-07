@@ -2,8 +2,9 @@
 '''
 GET ALL POSSIBLE FAILURE MESSAGES
 '''
-__author__ = 'john pierson'
+__author__ = 'john pierson - sixtysecondrevit@gmail.com'
 __twitter__ = '@60secondrevit'
+__github__ = '@sixtysecondrevit'
 __version__ ='1.0.0'
 
 # dynamo version - 1.3.3
