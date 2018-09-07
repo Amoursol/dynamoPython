@@ -1,0 +1,105 @@
+'''
+Python Templates - Useful Modules
+'''
+__author__ = 'Brendan cassidy'
+__twitter__ = '@brencass86'
+__version__ = '1.0.0'
+
+import clr
+
+# Sets up new path to ironpython module Library
+# See https://docs.python.org/2/library/sys.html
+import sys
+sys.path.append("C:\Program Files (x86)\IronPython 2.7\Lib")
+
+
+# Imports date/time info
+# See https://docs.python.org/2/library/time.html
+from time import gmtime, strftime
+
+# Applying time Day-Month-Year at Hour:min
+time_info = strftime("%d %b %Y at %H:%M", gmtime())
+
+#     OR
+
+# See https://docs.python.org/2/library/datetime.html
+from System import DateTime
+time_info = DateTime.Now
+
+
+# Imports operating system interfaces
+# See https://docs.python.org/2/library/os.html
+import os
+
+#Application - opens a file path
+File_Path = "Insert File Path Here"
+os.startfile(File_Path)
+
+
+# For manipulate paths
+# See https://docs.python.org/2/library/os.path.html#module-os.path
+import os.path
+
+
+ #Imports Subprocess module
+# See https://docs.python.org/2/library/subprocess.html
+import subprocess
+
+# Application of this with the os module 
+# Opens a windows folder from a path
+File_Path = "Insert File path here"
+Proj_Number = "Insert variable value to add at end"
+New_Path = os.path.join(File_Path,Proj_Number)
+subprocess.call(['explorer', New_Path], shell=True)
+
+
+# Import Strings Module
+#See https://docs.python.org/2/library/string.html
+import string
+
+# Gets Alphabet as Upper case and as a list
+Alpha_Chars = list(string.ascii_uppercase)
+
+
+# Imports math
+# See https://docs.python.org/2/library/math.html
+import math
+
+# Converts File Size to highest it can go to in relation to byte size
+# eg 59,158,528 bytes converts to 56.42 MB.
+def convertSize(size):
+   size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
+   i = int(math.floor(math.log(size,1024)))
+   p = math.pow(1024,i)
+   s = round(size/p,2)
+   if (s > 0):
+       return '%s %s' % (s,size_name[i])
+   else:
+       return '0B'
+       
+# To run it and include bytes value in brackets
+File_Size_input = 59158528
+File_Size_Output = convertSize(File_Size_input).ToString() + 
+                  " (" + 
+                  format(File_Size_input,',d') +
+                  " bytes)"
+
+
+# Import Iteration tools
+# See https://docs.python.org/2/library/itertools.html
+import itertools
+
+# Application 
+UniqueOutput=[(g[0].ToString(), len(list(g[1])).ToString()) for g in itertools.groupby(input)]
+
+
+# Imports Webbrowser Module
+# See https://docs.python.org/2/library/webbrowser.html
+import webbrowser
+
+# Application of this to open webpage
+url = IN[0]
+webbrowser.open(url, new=0, autoraise=True)
+
+#Output
+OUT = 0
