@@ -64,7 +64,7 @@ def ListChopEvenly(l, n):
 	return [l[i:i + n] for i in xrange(0, len(l), n)]
 
 # -----------------------
-# input paramters
+# input parameters
 # -----------------------
 
 # in the dynamo environment wire a string node to the input
@@ -82,19 +82,15 @@ replaceParams = inputParams.replace(' ', '')
 params = replaceParams.split(',')
 # so we can chop a flat list into groups we need to know its lengths
 paramsLen = len(params)
-# we will need somehere to store values for csv
-values = []
-# the csv will need to have as headers for each parameter
-for p in params :
-	values.append(p)
 
 # -----------------------
-# inputs
+# parameter values
 # -----------------------
 
 # collect all rooms as elements
 allRooms = fec(doc).OfCategory(BuiltInCategory.OST_Rooms).ToElements()
-
+# we will need somehere to store values for csv
+values = []
 # to lookup the parameter value, for each parameter, for each room
 for r in allRooms :
 	for p in params :
@@ -115,6 +111,9 @@ for r in allRooms :
 		elif strStorageType == 'Double' :
 			# cast value as double
 			doubleValue = value.AsDouble()
+			# convert square feet to square meters for area
+			if p == "Area" :
+				doubleValue = doubleValue * 0.092903 
 			# round the double value
 			doubleRound = round(doubleValue, 3)
 			# append values
@@ -122,6 +121,13 @@ for r in allRooms :
 
 # a flat list values needs to be chopped into groups by list length
 choppedValues = ListChopEvenly(values, paramsLen)
+choppedValues.sort()
+
+# the csv will need to have as headers for each parameter
+headers = []
+for p in params :
+	headers.append(p)
+choppedValues.insert(0, headers)
 
 # -----------------------
 # write csv file of room parameters
