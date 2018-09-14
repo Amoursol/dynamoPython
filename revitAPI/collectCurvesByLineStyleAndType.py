@@ -1,5 +1,5 @@
 """
-FILTERED ELEMENT COLLECTOR
+COLLECT CURVES BY LINE STYLE AND TYPE
 """
 __author__ = 'Sol Amour - amoursol@gmail.com'
 __twitter__ = '@solamour'
