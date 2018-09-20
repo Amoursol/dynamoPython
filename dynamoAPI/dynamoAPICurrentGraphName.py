@@ -31,7 +31,7 @@ if version.StartsWith("1."):
 	filename=currentWorkspace.FileName
 	
 	# Splits out file path to just file name
-	OUT=filename.Split("\\")[-1]
+	OUT=filename.Split("\\")[-1].Replace(".dyn","")
 
 elif version.StartsWith("2."):
 	OUT=currentWorkspace.Name
