@@ -26,8 +26,15 @@ version=dynamoRevit.RevitDynamoModel.Version
 
 # checks version of dynamo and adjusts output according to version
 if version.StartsWith("1."):
-	OUT=currentWorkspace.FileName
+	
+	# Gets file name which includes full path
+	filename=currentWorkspace.FileName
+	
+	# Splits out file path to just file name
+	OUT=filename.Split("\\")[-1]
+
 elif version.StartsWith("2."):
 	OUT=currentWorkspace.Name
+
 else:
 	OUT="Not supported"
