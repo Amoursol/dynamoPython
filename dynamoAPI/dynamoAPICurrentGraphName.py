@@ -21,5 +21,20 @@ import Dynamo
 dynamoRevit = Dynamo.Applications.DynamoRevit()
 currentWorkspace = dynamoRevit.RevitDynamoModel.CurrentWorkspace
 
-#output the current workspace's name
-OUT = currentWorkspace.Name
+# Access current version of dynamo
+version=dynamoRevit.RevitDynamoModel.Version
+
+# checks version of dynamo and adjusts output according to version
+if version.StartsWith("1."):
+	
+	# Gets file name which includes full path
+	filename=currentWorkspace.FileName
+	
+	# Splits out file path to just file name
+	OUT=filename.Split("\\")[-1].Replace(".dyn","")
+
+elif version.StartsWith("2."):
+	OUT=currentWorkspace.Name
+
+else:
+	OUT="Not supported"
