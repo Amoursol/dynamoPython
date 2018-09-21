@@ -21,6 +21,6 @@ Many thanks to all contributors of this community focused resource:
 * [Min Naung](https://github.com/mgjean)
 * [Oliver Green](https://github.com/OliverEGreen)
 * [Pablo Derendinger](https://github.com/pabloderen)
-* [John Pierson](https://github.com/sixtysecondrevit)
+* [John Pierson](https://github.com/johnpierson)
 * [Racel Williams](https://github.com/Racel)
 * [Radu Gidei](https://github.com/radumg)
