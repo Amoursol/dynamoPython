@@ -4,7 +4,9 @@ REQUEST VIEW CHANGE - ASYNC METHOD
 __author__ = 'John Pierson - sixtysecondrevit@gmail.com'
 __twitter__ = '@60secondrevit'
 __version__ = '1.0.0'
-
+"""
+This allows the end user to switch the active view in the current Revit file by supplying a single view.
+"""
 # Importing Reference Modules
 import clr # CLR ( Common Language Runtime Module )
 clr.AddReference("RevitServices")# Adding the RevitServices.dll special Dynamo 
