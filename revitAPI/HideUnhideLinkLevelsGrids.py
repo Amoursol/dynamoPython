@@ -10,7 +10,7 @@ __version__ ='1.0.0'
 # import common language runtime 
 import clr
 
-# clr.AddReference loads and imports .net assembly(dll) as python module
+# clr.AddReference loads and imports .net assembly(dll) as module
 # load RevitAPI.dll and RevitServices.dll
 clr.AddReference("RevitAPI")
 clr.AddReference("RevitServices")
@@ -28,15 +28,14 @@ from RevitServices.Transactions import TransactionManager
 # instantiate current document
 doc = DocumentManager.Instance.CurrentDBDocument
 
-
 # start transaction
-TransactionManager.Instance.EnsureInTransaction(doc);
+TransactionManager.Instance.EnsureInTransaction(doc)
 
 # active view
 active_view = doc.ActiveView
 
 # filter name "can name anything"
-ifilter = "ChangeYourCustomName"
+ifilter = "GiveFilterAName"
 
 endWiths = "Anything"
 
@@ -50,7 +49,7 @@ hide = False if IN[0] else True
 allFilters = FilteredElementCollector(doc).OfClass(FilterElement).ToElements()
 
 # get filters from current view
-viewFilters = active_view.GetFilters();
+viewFilters = active_view.GetFilters()
 # collect filters' names
 viewFiltersName = [doc.GetElement(i).Name.ToString() for i in viewFilters]
 
@@ -61,12 +60,12 @@ for fter in allFilters:
 		# add filter
 		active_view.AddFilter(fter.Id)
 		# set filter visibility
-		active_view.SetFilterVisibility(fter.Id, hide);
+		active_view.SetFilterVisibility(fter.Id, hide)
 		found = True
 	# filter already have in doc and current view
 	if ifilter == fter.Name.ToString() and ifilter in viewFiltersName:
 		# set filter visibility
-		active_view.SetFilterVisibility(fter.Id, hide);
+		active_view.SetFilterVisibility(fter.Id, hide)
 		found = True
 		
 # if filter not found in doc
@@ -93,7 +92,7 @@ if not found:
 		# if endwiths not include in type name
 		if not endWiths in elem.LookupParameter("Type Name").AsString():
 			# add endwiths in type name
-			elem.Name = elem.LookupParameter("Type Name").AsString() + endWiths;
+			elem.Name = elem.LookupParameter("Type Name").AsString() + endWiths
 	# get type names
 	type_names = [i.LookupParameter("Type Name").AsString() for i in type_elems]
 	# type name parameter id
@@ -112,4 +111,3 @@ TransactionManager.Instance.TransactionTaskDone()
 
 # output
 OUT = "DONE!"
-
