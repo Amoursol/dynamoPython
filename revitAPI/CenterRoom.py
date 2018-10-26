@@ -44,7 +44,7 @@ elems = IN[0]
 
 # make list
 if not isinstance(elems,list):
-	elems = UnwrapElement([elem])
+	elems = UnwrapElement([elems])
 else:
 	elems = UnwrapElement(elems)
 
