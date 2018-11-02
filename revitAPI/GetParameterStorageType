@@ -1,6 +1,6 @@
 '''
 Get Parameter storage type when you input parameters.
-This cann be a single item, a list or a list of list of parameters
+This can be a single item, a list or a list of list of parameters
 '''
 __author__ = 'Brendan cassidy'
 __twitter__ = '@brencass86'
