@@ -1,6 +1,8 @@
 '''
 Get Parameter storage type when you input parameters.
 This can be a single item, a list or a list of list of parameters
+
+Visit the website for more details https://github.com/Amoursol/dynamoPython
 '''
 __author__ = 'Brendan cassidy'
 __twitter__ = '@brencass86'
