@@ -24,3 +24,4 @@ Many thanks to all contributors of this community focused resource:
 * [John Pierson](https://github.com/johnpierson)
 * [Racel Williams](https://github.com/Racel)
 * [Radu Gidei](https://github.com/radumg)
+* [Timon Hazell](https://github.com/thazell)
