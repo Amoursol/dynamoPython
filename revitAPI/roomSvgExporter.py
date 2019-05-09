@@ -7,7 +7,7 @@ https://github.com/Amoursol/dynamoPython
 __author__ = 'Adam Bear - adam@ukbear.com'
 __twitter__ = '@adambear82'
 __github__ = '@adambear82'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 '''
 for large projects with lots of room data it is useful to analyse in
@@ -46,6 +46,9 @@ FilteredElementCollector as fec, \
 FilterDoubleRule, FilterNumericGreater, LogicalAndFilter, \
 ModelPathUtils, ParameterValueProvider, SpatialElement, \
 SpatialElementBoundaryOptions, SpatialElementBoundaryLocation
+# to create svg of areas instead of rooms import the room filter
+# so that rooms can be filtered instead of areas
+from Autodesk.Revit.DB.Architecture import RoomFilter
 
 # add reference for RevitServices (RevitServices)
 clr.AddReference('RevitServices')
@@ -195,6 +198,8 @@ levelFilter = ElementLevelFilter(levelUnwrappedId)
 
 # alias areaFilter, for areas (not rooms) we will want to exclude
 areaFilter = AreaFilter()
+# change to room filter if you want svg of areas not rooms
+#areaFilter = RoomFilter()
 # collect elements to be excluded
 areaExcludes = fec(doc).WherePasses(areaFilter).ToElements()
 # convert to a list if not allready so
@@ -422,20 +427,23 @@ y = xy[1]
 
 # min x value from nested sublist extracted using consecutive min()
 xmin = min(min(x))
-# min x value rounded up for use in svg tag
-xminc = math.ceil(xmin)
+# min x value rounded up/down for +/-ve numbers for use in svg tag
+if xmin < 0 : xminc = math.floor(xmin)
+else : xminc = math.ceil(xmin)
 # max x value from nested sublist extracted using consecutive max()
 xmax = max(max(x))
 # width of svg viewbox rounded up from, max - min
-width = math.ceil(xmax - xmin)
+width = math.ceil(xmax - xminc)
 # min y value from nested sublist extracted using consecutive min()
 ymin = min(min(y))
-# min y value rounded up for use in svg tag
-yminc = math.ceil(ymin)
+# min y value rounded up/down for +/-ve numbers for use in svg tag
+if ymin < 0 : yminc = math.floor(ymin)
+else : yminc = math.ceil(ymin)
+#yminc = math.ceil(ymin)
 # max y value from nested sublist extracted using consecutive max()
 ymax = max(max(y))
 # height of svg viewbox rounded up from, max - min
-height = math.ceil(ymax - ymin)
+height = math.ceil(ymax - yminc)
 # create a list of values
 svg = svgStart, xminc, yminc, width, height, svgTransform, svgScale, \
 svgEnd
