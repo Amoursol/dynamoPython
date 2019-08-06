@@ -1,0 +1,47 @@
+'''
+Get Parameter storage type when you input parameters.
+This can be a single item, a list or a list of list of parameters
+
+Visit the website for more details https://github.com/Amoursol/dynamoPython
+'''
+__author__ = 'Brendan cassidy'
+__twitter__ = '@brencass86'
+__version__ = '1.0.0'
+
+
+import clr
+
+# Import RevitAPI
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+
+# check input is a list, if it is output it
+# if not then make it a list
+if isinstance(IN[0], list):
+	wasitalist=True
+	inputparameter=IN[0]
+else:
+	wasitalist=False
+	inputparameter=[IN[0]]
+
+# Gets the storagetype of the parameter as output
+output=[]
+for ip in inputparameter:
+	# Checks if item has a sublist then adjsut accordingly
+  if isinstance(ip, list):
+		templist=[]
+		for ip2 in ip:
+			unwrap=UnwrapElement(ip2)
+			templist.append(unwrap.StorageType)
+		output.append(templist)
+	else:
+		unwrap=UnwrapElement(ip)
+		output.append(unwrap.StorageType)
+
+#outputs same structure layout as input if sinngle item or not
+if wasitalist:
+	OUT=output
+else:
+	OUT=output[0]
+		

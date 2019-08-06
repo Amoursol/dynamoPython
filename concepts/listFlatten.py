@@ -28,4 +28,21 @@ def flatten(L):
 
 flat_List2 = flatten(list_Of_List_Irregular)
 
-OUT = flat_List1, flat_List2
+
+#2nd option to Flatten list of list Irregular
+def flatten2(L):
+        # Return Flatten list from irregular list of list
+        def flat(L,output):
+                for item in L:
+		        if type(item) == list:
+			        flat(item,output)
+		        else:
+			        output.append(item)
+			
+	output=[]
+	flat(L,output)
+	return output
+
+flat_List3 = flatten2(list_Of_List_Irregular)
+
+OUT = flat_List1, flat_List2, flat_List3
