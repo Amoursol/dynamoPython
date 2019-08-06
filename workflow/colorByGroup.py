@@ -3,16 +3,32 @@ COLOR BY GROUP - VISUALISE GROUPS AS IN GROUP BY KEY
 '''
 __author__ = 'Adam Bear - adam@ukbear.com'
 __twitter__ = '@adambear82'
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 
 # IMPORTS / REFERENCES:
 import clr
 clr.AddReference('DSCoreNodes')
 import DSCore
+
 clr.AddReference('ProtoGeometry')
-from Autodesk.DesignScript.Geometry import *
-clr.AddReference('Display')
-from Display import *
+from Autodesk.DesignScript.Geometry import UV
+
+# this used to work just fine in dynamo 1.3
+#clr.AddReference('Display')
+#from Display import *
+
+# however In dynamo 2.0 the library is reorganised 
+# and the display reference is not used
+# instead we must add Geometry Color and import Modifiers
+clr.AddReference('GeometryColor')
+from Modifiers import GeometryColor
+# see lines below where
+# Display.ByGeometryColor
+# is replaced with
+# GeometryColor.ByGeometryColor
+
+# for more info on node migrations refer to
+# https://github.com/DynamoDS/Dynamo/blob/ec10f936824152e7dd7d6d019efdcda0d78a5264/src/Libraries/CoreNodes/DSCoreNodes.Migrations.xml
 
 # function to find the depth of a list, refer to stack overflow
 # https://stackoverflow.com/questions/6039103/counting-depth-or-the-deepest-level-a-nested-list-goes-to
@@ -68,7 +84,7 @@ for u, v in zip(sU, sV) :
 	sUV.append(UV.ByCoordinates(u, v))
 
 # the color range of the spectrum is mapped to indices using UV coords
-colorrange2d = DSCore.ColorRange2D.ByColorsAndParameters(spectrum, sUV)
+colorrange2d = DSCore.ColorRange.ByColorsAndParameters(spectrum, sUV)
 
 # as above for spectrum UVs, geometry UVs are listed
 # in design script this would be
@@ -98,11 +114,16 @@ colorByGroup = []
 # zip allows multiple items to be refered to in a loop
 # refer to geometry and colors as g1 and c
 for g1, c in zip(geometry, colors) :
-
+	
+	# there's is not a lot of point trying to color a list
+	# if there is only a single item in the list
+	# if depthGeometry == 0 :
+	
 	# check how many levels the list has, eg 1D list
 	if depthGeometry == 1 :
 		# append Display of g1 geometry using c colors to colorByGroup
-		colorByGroup.append(Display.ByGeometryColor(g1, c))
+		# note for dynamo 2.0 Display. is replaced with GeometryColor.
+		colorByGroup.append(GeometryColor.ByGeometryColor(g1, c))
 
 	# if not a 1D list, possibly 2D or 3D
 	else:
@@ -112,7 +133,8 @@ for g1, c in zip(geometry, colors) :
 			# check how many levels the list has, eg 2D list
 			if depthGeometry == 2 :
 				# append Display of g2 geometry using c colors to colorByGroup
-				colorByGroup.append(Display.ByGeometryColor(g2, c))
+				# note for dynamo 2.0 Display. is replaced with GeometryColor.
+				colorByGroup.append(GeometryColor.ByGeometryColor(g2, c))
 
 			# if not a 2D list, possibly 3D
 			else :
@@ -122,28 +144,28 @@ for g1, c in zip(geometry, colors) :
 					# check how many levels the list has, eg 3D list
 					if depthGeometry == 3 :
 						# append Display of g3 geometry using c colors to colorByGroup
-						colorByGroup.append(Display.ByGeometryColor(g3, c))
+						# note for dynamo 2.0 Display. is replaced with GeometryColor.
+						colorByGroup.append(GeometryColor.ByGeometryColor(g3, c))
 
 '''
 # alternative approach where each condition is considered seperately
 # perhaps not as efficient but easier to read and understand
-
 for g1, c in zip(geometry, colors) :
-
 	# check how many levels the list has, eg 1D list
 	elif depthGeometry == 1 :
-		colorByGroup.append(Display.ByGeometryColor(g1, c))
-
+		# note for dynamo 2.0 Display. is replaced with GeometryColor.
+		colorByGroup.append(GeometryColor.ByGeometryColor(g1, c))
 	# check how many levels the list has, eg 2D list
 	elif depthGeometry == 2 :
 		for g2 in g1 :
-			colorByGroup.append(Display.ByGeometryColor(g2, c))
-
+			# note for dynamo 2.0 Display. is replaced with GeometryColor.
+			colorByGroup.append(GeometryColor.ByGeometryColor(g2, c))
 	# check how many levels the list has, eg 3D list
 	elif depthGeometry == 3 :
 		for g2 in g1 :
 			for g3 in g2 :
-				colorByGroup.append(Display.ByGeometryColor(g3, c))
+				# note for dynamo 2.0 Display. is replaced with GeometryColor.
+				colorByGroup.append(GeometryColor.ByGeometryColor(g3, c))
 '''
 
 # to output the displayed geometry in the same groups as it is inputed
@@ -154,7 +176,7 @@ def ListChopEvenly(l, n):
 	# https://stackoverflow.com/questions/312443/how-do-you-split-a-list-into-evenly-sized-chunks
 	return [l[i:i + n] for i in xrange(0, len(l), n)]
 # clockworks chop definition is used to chop the geometry
-choppedGroups = ListChopEvenly(colorByGroup, len(geometry))
+#choppedGroups = ListChopEvenly(colorByGroup, len(geometry))
 
 # the choppedGroups are sent to the OUT port
-OUT = choppedGroups
+OUT = colorByGroup#choppedGroups
