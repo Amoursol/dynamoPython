@@ -4,7 +4,7 @@ DYNAMOAPI: Get User Package Location For Currently Running Dynamo Application
 
 __author__ = 'Brendan cassidy'
 __twitter__ = '@brencass86'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 """
 This will gather the correct user package location depending on what version of dynamo is running in either Civil 3d or Revit. 
@@ -25,6 +25,8 @@ import os
 # Module to read a dll assembly version
 from System.Diagnostics import FileVersionInfo
 
+import collections
+
 # Function to trim string version input down to main version
 def GetReducedVersion(input):
 	# Strings version down to main version
@@ -35,6 +37,25 @@ def GetReducedVersion(input):
 			stringIndex.append(count)
 		count=count+1
 	return input[0:stringIndex[1]]
+
+def GetAllDynamoFolders(path):
+	directories = []
+	# r=root, d=directories, f = files
+	for r, d, f in os.walk(path):
+	    for directory in d:
+	    	temppath=os.path.join(r, directory)
+	        if temppath.endswith("\\packages") and temppath.count("\\packages")==1:
+				directories.append(temppath)
+	return directories
+
+# Flatten List Function
+def flattenlist(listin):
+    for el in listin:
+        if isinstance(el, collections.Iterable) and not isinstance(el, basestring):
+            for sub in flattenlist(el):
+                yield sub
+        else:
+                yield el
 
 # Trys to find Revit API, if it errors out it will skip
 try:
@@ -77,7 +98,8 @@ try:
 		DynamoCoreVersion=dynamoRevit.RevitDynamoModel.Version
 		
 	# Constructs the user package location path	
-	OUT = os.getenv('APPDATA') + '\\Dynamo\\Dynamo Revit\\' + GetReducedVersion(DynamoCoreVersion) + '\\packages'
+	OUT = os.getenv('APPDATA') + '\\Dynamo\\Dynamo Revit\\' + GetReducedVersion(DynamoCoreVersion) + '\\packages', GetAllDynamoFolders(os.getenv('APPDATA') + '\\Dynamo\\Dynamo Revit\\')
+	
 		
 # outputs a error to do something else if it cannot find Revit API
 except:
@@ -112,10 +134,16 @@ except:
 		
 			# Gets Dynamo Core dll file Version
 			DynamoCoreVersion = FileVersionInfo.GetVersionInfo(dynamoCoreLoc).FileVersion
-
+			
+			templist=[]
+			for a in range(2020, 2030):
+				if os.path.exists(os.getenv('APPDATA') + '\\Autodesk\\C3D ' + a.ToString() + '\\Dynamo\\'):
+					templist.append(GetAllDynamoFolders(os.getenv('APPDATA') + '\\Autodesk\\C3D ' + a.ToString() + '\\Dynamo\\'))
+			
 			# Constructs the user package location path
-			OUT = os.getenv('APPDATA') + '\\Autodesk\C3D ' + appVersion + '\\Dynamo\\' + GetReducedVersion(DynamoCoreVersion) + '\\packages'
+			OUT = os.getenv('APPDATA') + '\\Autodesk\\C3D ' + appVersion + '\\Dynamo\\' + GetReducedVersion(DynamoCoreVersion) + '\\packages', flattenlist(templist)
 	
 	# Outputs a error that this wasnt run from within a dynamo hosted in revit or Civil 3D
 	except:	
 		OUT = "This code only works within revit/Civils 3d"
+
