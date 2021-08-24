@@ -24,7 +24,7 @@ currentWorkspacePath = ExecutionEvents.ActiveSession.CurrentWorkspacePath
 fileName = currentWorkspacePath.split("\\")[-1]
 
 # Removes the dyn File type from the end of the file name
-FileNameWithoutFileType = fileName.replace(".dyn","")
+fileNameWithoutFileType = fileName.replace(".dyn","")
 
 # Outputs the full file path, file name with file type and just file name
-OUT = currentWorkspacePath, fileName, FileNameWithoutFileType
+OUT = currentWorkspacePath, fileName, fileNameWithoutFileType
