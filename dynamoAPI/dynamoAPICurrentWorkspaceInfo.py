@@ -8,12 +8,12 @@ __version__ = '1.0.1'
 Original code indicated here https://forum.dynamobim.com/t/get-graph-filename/67434/5
 This version includes 2 additional outputs for File name with and without file type.
 """
-# we need to import the common language runtime to be able to interact with Dynamo & Revit
+# we need to import the common language runtime to be able to interact with Dynamo
 
 # Importing Reference Modules
 # CLR ( Common Language Runtime Module )
 import clr
-# Adding the DynamoServices.dll module to work with the Dynamo API
+# Adding the DynamoServices.dll module to work with the Dynamo API we need
 clr.AddReference('DynamoServices')
 from Dynamo.Events import *
 
