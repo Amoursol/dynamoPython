@@ -3,8 +3,10 @@ DYNAMOAPI: GET CURRENT WORKSPACE PATH AND FILE NAME FOR DYNAMO ON ALL HOST VERSI
 """
 __author__ = 'Brendan cassidy'
 __twitter__ = '@brencass86'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 """
+Original code indicated here https://forum.dynamobim.com/t/get-graph-filename/67434/5
+This version includes 2 additional outputs for File name with and without file type.
 """
 # we need to import the common language runtime to be able to interact with Dynamo & Revit
 
