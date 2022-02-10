@@ -29,8 +29,7 @@ doc = DocumentManager.Instance.CurrentDBDocument
 # then call the ORANGE part of RevitAPIDocs ( Document, View ). We are running 
 # multiple filters here: The 'OfClass', 'OfCategory' and 'Where Element Is Not 
 # Element Type'. We then cast it to Elements so we can use it in Dynamo.
-elementCollector = FilteredElementCollector( doc ).WhereElementIsNotElementType()
-.ToElements()
+elementCollector = FilteredElementCollector( doc ).WhereElementIsNotElementType().ToElements()
 
 # To get our results back inside of Dynamo, we need to append a list to the OUT port
 OUT = elementCollector
