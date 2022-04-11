@@ -38,7 +38,7 @@ lineType = [ crv.Name for crv in curves ]
 # the 'Line Style Names' for each curve in our 'curves' list
 lineStyle = [ crv.LineStyle.Name for crv in curves ]
 
-# We then want to pull ouch the unique names of each of our Line Style Names, so we
+# We then want to pull out the unique names of each of our Line Style Names, so we
 # call 'set' on the 'lineStyle' list. Set acts like List.UniqueItems inside of Dynamo
 uniqueLineStyles = set(lineStyle)
 
