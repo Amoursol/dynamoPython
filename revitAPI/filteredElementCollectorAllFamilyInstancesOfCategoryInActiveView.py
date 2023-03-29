@@ -29,9 +29,7 @@ doc = DocumentManager.Instance.CurrentDBDocument
 # 'Active View' of our document, all 'Family Instances' of a particular 
 # category ('Planting'). We then cast it to Elements so we can use it in 
 # Dynamo.
-builtInCollector = FilteredElementCollector( doc, doc.ActiveView.Id )
-.OfClass( FamilyInstance ).OfCategory( BuiltInCategory.OST_Planting )
-.WhereElementIsNotElementType().ToElements()
+builtInCollector = FilteredElementCollector( doc, doc.ActiveView.Id ).OfClass( FamilyInstance ).OfCategory( BuiltInCategory.OST_Planting ).WhereElementIsNotElementType().ToElements()
 
 # To get our results back inside of Dynamo, we need to append a list to 
 # the OUT port
