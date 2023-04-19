@@ -33,10 +33,10 @@ uiapp = DocumentManager.Instance.CurrentUIApplication
 # Gets revit version number
 rvtVersion = uiapp.Application.VersionNumber
 
-# Creates a new hastset that is
+# Creates a new hastset of ElementID's
 catIdList = HashSet[ElementId]()
 
-# items used to aid run count and total amount of elements deleted
+# Starts of the counts/totals at 0.
 purgeCount = 0
 delTotal = 0
 
@@ -46,8 +46,9 @@ if rvtVersion >= 2024:
 	# Checks the purge count is not over 10 
 	while purgeCount < 10:
 		
-		# Extracts Unsured Elements from a list of categories
-		# List is empty and therefore it will get all unused item in project file
+		# Extracts Unsused Elements from a list of categories, though this list is empty and
+		# therefore it will get all unused item in project file. More info on the api can be found on RevitAPi docs 
+		# or https://thebuildingcoder.typepad.com/blog/2023/04/whats-new-in-the-revit-2024-api.html#4.2.15
 		purgeElements = doc.GetUnusedElements(catIdList)
 		
 		# Checks that there are items to be purged
@@ -60,7 +61,7 @@ if rvtVersion >= 2024:
 			# Totals up the amount of items deleted
 			delTotal = delTotal + purgeElements.Count
 		
-		# Breaks out if there is no elements to purge
+		# Breaks out if there are no elements to purge
 		else:
 			break
 		# Add a 1 to the purgecount for use within the while statement
