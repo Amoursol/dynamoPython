@@ -1,5 +1,5 @@
 '''
-ROOM SVG EXPORTER - EXPORT A SINGLE LEVELS ROOM BOUNDARIES
+ROOM OR SPACE SVG EXPORTER - EXPORT A SINGLE LEVELS ROOM OR SPACE BOUNDARIES
 -
 a dynamoPython script, visit the website for more details
 https://github.com/Amoursol/dynamoPython
@@ -10,7 +10,7 @@ __github__ = '@adambear82'
 __version__ = '1.0.1'
 
 '''
-for large projects with lots of room data it is useful to analyse in
+for large projects with lots of room or space data it is useful to analyse in
 a business inteligence or data visualisation tool such as ms power bi.
 To visualise rooms in power bi they can be cnoverted to svg and read
 with the synoptic panel in power bi. This script collects rooms for a
@@ -46,6 +46,8 @@ FilteredElementCollector as fec, \
 FilterDoubleRule, FilterNumericGreater, LogicalAndFilter, \
 ModelPathUtils, ParameterValueProvider, SpatialElement, \
 SpatialElementBoundaryOptions, SpatialElementBoundaryLocation
+# added ElementCategoryFilter class so elements can be filtered by category - JPS
+from Autodesk.Revit.DB import ElementCategoryFilter
 # to create svg of areas instead of rooms import the room filter
 # so that rooms can be filtered instead of areas
 from Autodesk.Revit.DB.Architecture import RoomFilter
@@ -74,6 +76,10 @@ docPathFolder = docPath + '\\'
 # which can then be used to find the name of the level
 levelInput = IN[0]
 levelName = levelInput.Name
+# added category input so elements can be filtered by category - JPS
+categoryInput = IN[1]
+# added directory input so SVG can be saved to desired location - JPS
+directoryInput = IN[2]
 
 # the units of room boundary curves will need to be scaled so that
 # they display suitable as pixles in the svg
@@ -196,6 +202,14 @@ levelUnwrappedId = levelUnwrapped.Id
 # filter elements by the unwrapped level id
 levelFilter = ElementLevelFilter(levelUnwrappedId)
 
+# added categoryFilter so elements can be filtered by category - JPS
+# unwrap the category selected from the dynamo node
+categoryUnwrapped = UnwrapElement(categoryInput)
+# get the Id of the category
+categoryUnwrappedId = categoryUnwrapped.Id
+# filter elements by the unwrapped category id
+categoryFilter = ElementCategoryFilter(categoryUnwrappedId)
+
 # alias areaFilter, for areas (not rooms) we will want to exclude
 areaFilter = AreaFilter()
 # change to room filter if you want svg of areas not rooms
@@ -208,11 +222,15 @@ areaExcludes = list(areaExcludes)
 # create empty set and list to store elements in
 element_set = ElementSet()
 excludes = List[ElementId]()
+
+# added list of filters that can be used with LogicalAndFiler below - JPS
+filterList = [levelFilter, categoryFilter, filterArea0]
 # check if there are any areas to exclude
 if len(areaExcludes) == 0 :
     # if there are no areas to exclude then
     # filter for levelFilter and filterArea0
-    filters = LogicalAndFilter(levelFilter, filterArea0)
+    #filters = LogicalAndFilter(levelFilter, filterArea0)
+    filters = LogicalAndFilter(filterList)
 # otherwise if there are areas to exclude
 else:
     # for each item in areaExcludes
@@ -229,8 +247,11 @@ else:
     afterExclusion = ExclusionFilter(excludes)
     # include levelFilter and afterExclusion
     filtLevExc = LogicalAndFilter(levelFilter, afterExclusion)
+    # include categoryFilter and afterExclusion
+    filtCatExc = LogicalAndFilter(categoryFilter, afterExclusion)	
     # include previous filters and filterArea0
-    filters = LogicalAndFilter(filtLevExc, filterArea0)
+    #filters = LogicalAndFilter(filtLevExc, filterArea0)
+    filters = LogicalAndFilter(filterList)	
 
 # create empty list to store room numbers in
 roomNumbers = []
@@ -506,7 +527,9 @@ strContent = '\n'.join(joinContent)
 
 # save the svg to the same folder as the revit file
 # include the level name in the svg file name
-svgPath = docPathFolder + levelName + ' - rooms.svg'
+#svgPath = docPathFolder + levelName + ' - rooms.svg'
+# assemble svgPath with user selected destination - JPS
+svgPath = directoryInput + '/' + levelName + ' - rooms.svg'
 # use try to allow a message to be displayed if fails
 try :
 	# use with so that file does not need to be manually closed
