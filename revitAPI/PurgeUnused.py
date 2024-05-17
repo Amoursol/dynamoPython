@@ -1,12 +1,13 @@
 '''
 This will purge out all elements it can from the current project file.
 Note: 
-	This code will only work in revit 2024 and above because of the new Revit api
+	This code will only work in revit 2020 and above. In revit 2024 it will 
+ 	utilise the new Revit api, and in 2020 to 2023 it will utilise eTransmit.
 	This Python code is based of IronPython2 python engine
 '''
 __author__ = 'Brendan cassidy'
 __twitter__ = '@brencass86'
-__version__ = '1.0.0'
+__version__ = '2.0.0'
 
 import clr
 
@@ -31,17 +32,17 @@ doc = DocumentManager.Instance.CurrentDBDocument
 uiapp = DocumentManager.Instance.CurrentUIApplication
 
 # Gets revit version number
-rvtVersion = uiapp.Application.VersionNumber
+rvtVersion = int(uiapp.Application.VersionNumber)
 
-# Creates a new hastset of ElementID's
-catIdList = HashSet[ElementId]()
-
-# Starts of the counts/totals at 0.
-purgeCount = 0
-delTotal = 0
-
-# Checks and makes sure it will only run in revit 2024 and above.
+# Checks for Revit 2024 because Native get unused api was released in this version.
 if rvtVersion >= 2024:
+
+	# Starts of the counts/totals at 0.
+	purgeCount = 0
+	delTotal = 0
+	
+	# Creates a new hastset of ElementID's
+	catIdList = HashSet[ElementId]()
 	
 	# Checks the purge count is not over 10 
 	while purgeCount < 10:
@@ -74,6 +75,29 @@ if rvtVersion >= 2024:
 		# Outputs the amount of elements that was deleted and how many times the delete/purge command was run.
 		OUT = "Purge Elements Ran a total of " + purgeCount.ToString() + " times \n and deleted " + delTotal.ToString() + " elements."
 
-# Indicates if the revit version is lower than Revit 2024.
+# Checks for revit 2020 to 2023 as this utilises the Etranmit API which has a Purge unused.
+elif 2020 <= rvtVersion <= 2023:
+	# Loads in the correct version of Etransmit dll's
+	if rvtVersion == 2020:
+		sys.path.append(r'C:\Program Files\Autodesk\eTransmit for Revit 2020')
+	elif rvtVersion == 2021:
+		sys.path.append(r'C:\Program Files\Autodesk\eTransmit for Revit 2021')
+	elif rvtVersion == 2022:
+		sys.path.append(r'C:\Program Files\Autodesk\eTransmit for Revit 2022')
+	elif rvtVersion == 2023:
+		sys.path.append(r'C:\Program Files\Autodesk\eTransmit for Revit 2023')
+	
+	#Imports the eTransmit 
+	clr.AddReference("eTransmitForRevitDB")
+	import eTransmitForRevitDB as eTransmit
+	
+	# does the purge unused at least 5 times to make sure all is purged
+	for i in range(5):
+		eTransmitUpgradeOMatic = eTransmit.eTransmitUpgradeOMatic(app)
+		resultPurg = eTransmitUpgradeOMatic.purgeUnused(doc)
+
+	OUT =  doc.Title + " has been purged. "
+
+# Indicates it cannot be used on revit 2019 or earlier.
 else:
-	OUT = "Your version of Revit is lower than the minimum of Revit 2024."
+	OUT = "Your current version of revit is unsupported"
